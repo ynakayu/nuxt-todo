@@ -5,6 +5,7 @@
       <li v-for="todo in todos" :key="todo.id">
         <!-- {{ todo }} -->
         {{ todo.done }} {{ todo.name }} {{ todo.created }}
+        <button v-on:click="remove(todo.id)">X</button>
       </li>
     </ul>
     <div class="form">
@@ -31,6 +32,9 @@
       add() {
         this.$store.dispatch('todos/add', this.name)
         this.name = ''
+      },
+      remove(id) {
+        this.$store.dispatch('todos/remove', id)
       }
     },
     computed: {
