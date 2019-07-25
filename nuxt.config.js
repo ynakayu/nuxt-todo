@@ -1,5 +1,5 @@
 const pkg = require('./package')
-
+const webpack = require('webpack')
 
 module.exports = {
   mode: 'spa',
@@ -52,6 +52,11 @@ module.exports = {
     */
     extend(config, ctx) {
       
-    }
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        '_': 'lodash'
+      })
+    ]
   }
 }
