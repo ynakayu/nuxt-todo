@@ -9,7 +9,7 @@
         v-bind:checked="todo.done"
         @change="toggle(todo)">
         <span v-bind:class="{ done: todo.done }">
-          {{ todo.name }} {{ todo.created }}
+          {{ todo.name }} {{ todo.created.toDate() | dateFilter }}
         </span>
         <button v-on:click="remove(todo.id)">X</button>
       </li>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+  import moment from 'moment'
   export default {
     data: function() {
       return {
@@ -49,6 +50,11 @@
     computed: {
       todos() {
         return this.$store.state.todos.todos
+      }
+    },
+    filters: {
+      dateFilter: function(date) {
+        return moment(date).format('YYYY/MM/DD HH:mm:ss')
       }
     }
   }
